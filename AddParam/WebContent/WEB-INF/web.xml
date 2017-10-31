@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>AddParam</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>AddParam</display-name>
+    <servlet-name>AddParam</servlet-name>
+    <servlet-class>com.AddParam.AddParam</servlet-class>
+    <init-param>
+      <param-name>AddParam</param-name>
+      <param-value>Add Param</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddParam</servlet-name>
+    <url-pattern>/AddParam</url-pattern>
+  </servlet-mapping>
+</web-app>
