@@ -1,9 +1,6 @@
 package com.CreatPost;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -29,25 +26,8 @@ public class AddPost extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void addPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
-    	try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String hostName = "localhost:3306";
-		String dbName = "test1";
-		String mySqlUrl =  "jdbc:mysql://"+hostName+"/"+dbName;
-		String user = "root";
-		String password = "";
-		
-		java.sql.Connection c = (java.sql.Connection)DriverManager.getConnection(mySqlUrl, user, password);
-		java.sql.Statement s = (java.sql.Statement)c.createStatement();
-		//String query = "SELECT * FROM comment";
-		//ResultSet result = s.executeQuery(query);
-		String comment = request.getParameter("comment");
-		String query = "INSERT INTO `test1`.`comment` ( `id_comment` , `content` ) VALUES ( NULL , '"+comment+"' );";
-		s.executeUpdate(query);
+    	DataBaseWork db = new DataBaseWork();
+		db.instert(request.getParameter("comment"));
 		response.sendRedirect("ShowPost");
     }  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -25,23 +25,10 @@ public class ShowPost extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    DataBaseWork db;
     protected void showPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
-    	try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String hostName = "localhost:3306";
-		String dbName = "test1";
-		String mySqlUrl =  "jdbc:mysql://"+hostName+"/"+dbName;
-		String user = "root";
-		String password = "";
-		
-		java.sql.Connection c = (java.sql.Connection)DriverManager.getConnection(mySqlUrl, user, password);
-		java.sql.Statement s = (java.sql.Statement)c.createStatement();
-		String query = "SELECT * FROM comment  ORDER BY `comment`.`id_comment` DESC";
-		ResultSet result = s.executeQuery(query);
+    	DataBaseWork db = new DataBaseWork();
+		ResultSet result = db.select();
 		
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
@@ -55,13 +42,27 @@ public class ShowPost extends HttpServlet {
 		out.println("<textarea name= \"comment\"> </textarea> <br>");
 		out.println("<input type=\"submit\" value=\"Add Comment\" />");
 		out.println("</form>");
+		
 		while(result.next()) {
-			out.println(result.getString("id_comment") + ": " + result.getString("content") + "<br>");
+			String idComment = result.getString("id_comment");
+			String idContent = result.getString("content");
+			out.println("- " + idContent);
+			out.println("<br>");
+			out.println("<div style=\"display: inline-block;\">");
+			out.println("<form action=\"DeleteUpdate\" method=\"post\">");
+			out.println("<input type=\"hidden\" name=\"idContent\" value=\"" +idContent +"\" />");
+			out.println("<input type=\"hidden\" name=\"idComment\" value=\"" +idComment +"\" />");
+			out.println("<input type=\"submit\" name=\"operation\" value=\"X\" />");
+			out.println("<input type=\"submit\" name=\"operation\" value=\"Update\" />");
+			out.println("</form>");
+			out.println("</div> <br>");
+			
 		}
 		out.println("</center>");
 		out.println("</body>");
 		out.println("</html>");
-    }  
+    }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {

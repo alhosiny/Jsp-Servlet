@@ -29,4 +29,14 @@
     <servlet-name>AddPost</servlet-name>
     <url-pattern>/AddPost</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteUpdate</display-name>
+    <servlet-name>DeleteUpdate</servlet-name>
+    <servlet-class>com.CreatPost.DeleteUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUpdate</servlet-name>
+    <url-pattern>/DeleteUpdate</url-pattern>
+  </servlet-mapping>
 </web-app>
