@@ -27,7 +27,8 @@ public class AddPost extends HttpServlet {
 	 */
     protected void addPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
     	DataBaseWork db = new DataBaseWork();
-		db.instert(request.getParameter("comment"));
+    	String query = "INSERT INTO `test1`.`comment` ( `id_comment` , `content` ) VALUES ( NULL , '"+request.getParameter("comment")+"' );";
+		db.excuteDml(query);
 		response.sendRedirect("ShowPost");
     }  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

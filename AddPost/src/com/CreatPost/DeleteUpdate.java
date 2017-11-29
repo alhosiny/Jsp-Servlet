@@ -37,7 +37,8 @@ public class DeleteUpdate extends HttpServlet {
 			e.printStackTrace();
 		}
 		try {
-			db.update(request.getParameter("idComment"),  request.getParameter("content"));
+			String query = "UPDATE  `test1`.`comment` SET  `content` =  ' "+request.getParameter("content")+"' WHERE  `comment`.`id_comment` ="+request.getParameter("idComment")+";"; 
+			db.excuteDml(query)  ;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +62,8 @@ public class DeleteUpdate extends HttpServlet {
 		String operation = request.getParameter("operation");
 		if(operation.equalsIgnoreCase("X")) {
 			try {
-				db.remove(idComment);
+			    String query = "DELETE FROM `test1`.`comment` WHERE `comment`.`id_comment` = " + idComment+";" ;
+				db.excuteDml(query);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -28,7 +28,7 @@ public class ShowPost extends HttpServlet {
     DataBaseWork db;
     protected void showPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
     	DataBaseWork db = new DataBaseWork();
-		ResultSet result = db.select();
+		ResultSet result = db.select("SELECT * FROM comment  ORDER BY `comment`.`id_comment` DESC");
 		
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
